@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Palestrantes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <img [src]="perfil.img"/>
+
+    <ion-card-content>
+      <h2 class="card-title">
+        {{perfil.nome}}
+      </h2>
+      <p>
+        {{perfil.curriculo}}
+      </p>
+    </ion-card-content>
+
+    <ion-item>
+      <ion-icon name='ios-calendar-outline' item-left style="color: #d03e84"></ion-icon>
+      Palestra 1
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name='logo-twitter' item-left style="color: #55acee"></ion-icon>
+      Palestra 2
+    </ion-item>
+
+  </ion-card>
+</ion-content>

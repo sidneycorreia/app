@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Palestrantes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let p of palestrantes" (click)="changePage($event)">
+      <ion-avatar item-left>
+        <img [src]="p.img">
+      </ion-avatar>
+      <h2>{{ p.nome }}</h2>
+      <p>{{ p.instituicao }}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController } from 'ionic-angular';
-import { StatusBar, Push, Splashscreen, SQLite } from 'ionic-native';
+import { StatusBar, Push, Splashscreen } from 'ionic-native';
 
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { PalestranteLista } from '../pages/palestrante/lista';
 
+import {DBCore} from '../providers/db/core';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,22 +37,16 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      //var db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
 
-      let db = new SQLite();
+      let dbAdapter = "";
+      if (this.platform.is('cordova')) {
+        dbAdapter = "SQLite";
+      } else {
+        dbAdapter = "WebSQL";
+      }
 
-      db.openDatabase({
-        name: 'data.db',
-        location: 'default' // the location field is required
-      }).then(() => {
-        db.executeSql('create table danceMoves(name VARCHAR(32))', {}).then(() => {
-
-        }, (err) => {
-          console.error('Unable to execute sql: ', err);
-        });
-      }, (err) => {
-        console.error('Unable to open database: ', err);
-      });
+      let db = new DBCore(dbAdapter);
+      db.init();
       /*
       let push = Push.init({
         android: {

@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "websql": "registry:dt/websql#0.0.0+20160316155526"
+  }
+}

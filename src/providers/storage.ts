@@ -21,8 +21,8 @@ class StorageAbstract {
         return result.rows.item(0);
     }
 }
-/*
-WebSQLAdapter extends StorageAbstract implements IStorage {
+
+class WebSQLAdapter extends StorageAbstract implements IStorage {
     window: any = window;
     db: any;
 
@@ -58,13 +58,13 @@ WebSQLAdapter extends StorageAbstract implements IStorage {
       });
     }
 }
-*/
+
 class StorageFactory {
     constructor (public platform: Platform) {
         if (this.platform.is('cordova')) {
             //SQLiteAdapter
         } else {
-            //return new WebSQLAdapter({name: "data.db"});
+            return new WebSQLAdapter({name: "data.db"});
         }
 
     }
@@ -76,6 +76,6 @@ export class Storage {
   db: IStorage;
 
   constructor () {
-    //this.db = new StorageFactory();
+    this.db = new StorageFactory();
   }
 }

@@ -9,6 +9,7 @@ interface IStorage {
 }
 
 class StorageAbstract {
+
     fetchAll (result: any): Array<any> {
         var output = [];
         for (var i = 0; i < result.rows.length; i++) {
@@ -25,10 +26,6 @@ class StorageAbstract {
 class WebSQLAdapter extends StorageAbstract implements IStorage {
     window: any = window;
     db: any;
-
-    constructor (config: any) {
-      this.openDatabase(config);
-    }
 
     openDatabase (config: any): Promisse<any> {
 
@@ -60,15 +57,15 @@ class WebSQLAdapter extends StorageAbstract implements IStorage {
 }
 
 class StorageFactory {
-    constructor (public platform: Platform) {
+  platform: Platform;
+
+  constructor () {
         if (this.platform.is('cordova')) {
             //SQLiteAdapter
         } else {
-            return new WebSQLAdapter({name: "data.db"});
+            new WebSQLAdapter({name: "data.db"});
         }
-
-    }
-
+  }
 }
 
 @Injectable()

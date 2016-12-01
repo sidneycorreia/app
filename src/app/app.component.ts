@@ -39,7 +39,7 @@ export class MyApp {
       Splashscreen.hide();
 
       let storage = new Storage();
-      //storage.query("CREATE TABLE teste_1( nome VARCHAR(20))");
+      storage.query("CREATE TABLE teste_1( nome VARCHAR(20))");
 
       /*
       let dbAdapter = "";

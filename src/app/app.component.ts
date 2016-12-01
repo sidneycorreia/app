@@ -6,7 +6,7 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { PalestranteLista } from '../pages/palestrante/lista';
 
-import {DBCore} from '../providers/db/core';
+import {Storage} from '../providers/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -38,6 +38,10 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
+      let storage = new Storage();
+      //storage.query("CREATE TABLE teste_1( nome VARCHAR(20))");
+
+      /*
       let dbAdapter = "";
       if (this.platform.is('cordova')) {
         dbAdapter = "SQLite";
@@ -46,7 +50,7 @@ export class MyApp {
       }
 
       let db = new DBCore(dbAdapter);
-      db.init();
+      db.init();*/
       /*
       let push = Push.init({
         android: {

@@ -92,14 +92,12 @@ class SQLiteAdapter extends AdapterAbstract implements IAdapter {
           });
         });
       });
-
-
     }
 }
 
 class AdapterFactory {
 
-  getAdapter (platform: Platform) {
+  getAdapter (platform: Platform): IAdapter {
     if (platform.is('cordova')) {
       return new SQLiteAdapter({
         name:     'data.db',

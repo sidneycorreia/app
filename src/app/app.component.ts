@@ -5,8 +5,9 @@ import { StatusBar, Push, Splashscreen } from 'ionic-native';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { PalestranteLista } from '../pages/palestrante/lista';
+import { AtualizacaoPage } from '../pages/atualizacao/atualizacao';
 
-import {Storage} from '../providers/storage';
+import {Storage} from '../providers/db/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,8 @@ export class MyApp {
     this.pages = [
       { title: 'Page One', component: Page1 },
       { title: 'Page Two', component: Page2 },
-      { title: 'Palestrantes', component: PalestranteLista }
+      { title: 'Palestrantes', component: PalestranteLista },
+      { title: 'Atualizacao', component: AtualizacaoPage }
     ];
 
   }

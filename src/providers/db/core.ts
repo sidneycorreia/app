@@ -24,7 +24,7 @@ export class DBCore {
   query (query: string, bindings: any) {
 
     this._dbPromisse.then(() => {
-        this._db.executeSql('create table danceMoves(name VARCHAR(32))', {}).then(() => {
+      this._db.executeSql('create table danceMoves(name VARCHAR(32))', {}).then(() => {
         console.log('Deu certo executou a query');
       }, (err) => {
         console.error('Unable to execute sql: ', err);

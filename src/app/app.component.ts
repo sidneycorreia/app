@@ -39,18 +39,8 @@ export class MyApp {
       Splashscreen.hide();
 
       let storage = new Storage();
-      storage.query("CREATE TABLE teste_1( nome VARCHAR(20))");
+      storage.adapter.query("CREATE TABLE teste_1( nome VARCHAR(20))",[]);
 
-      /*
-      let dbAdapter = "";
-      if (this.platform.is('cordova')) {
-        dbAdapter = "SQLite";
-      } else {
-        dbAdapter = "WebSQL";
-      }
-
-      let db = new DBCore(dbAdapter);
-      db.init();*/
       /*
       let push = Push.init({
         android: {

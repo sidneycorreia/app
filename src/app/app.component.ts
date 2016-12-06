@@ -7,7 +7,7 @@ import { Page2 } from '../pages/page2/page2';
 import { PalestranteLista } from '../pages/palestrante/lista';
 import { AtualizacaoPage } from '../pages/atualizacao/atualizacao';
 
-import {Storage} from '../providers/db/storage';
+import { Migration } from '../providers/db/migration';
 
 @Component({
   templateUrl: 'app.html'
@@ -40,8 +40,9 @@ export class MyApp {
       StatusBar.styleDefault();
       Splashscreen.hide();
 
-      let storage = new Storage();
-      storage.adapter.query("CREATE TABLE teste_1( nome VARCHAR(20))",[]);
+      let migration = new Migration();
+      migration.aplicar();
+      //storage.adapter.query("CREATE TABLE teste_1( nome VARCHAR(20))",[]);
 
       /*
       let push = Push.init({

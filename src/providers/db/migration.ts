@@ -8,9 +8,15 @@ import { Storage } from '../../providers/db/storage';
 export class Migration {
   
   private storage: Storage;
+  private modificacoes: string[];
 
-  constructor () {
+  constructor (modificacoes?: string[]) {
     this.storage = new Storage();
+
+    if (modificacoes) {
+      this.definirModificacoes (modificacoes);
+    }
+    
   }
 
   checarSeEstruturaInicialJaFoiCriada (): Promise<any> {
@@ -32,38 +38,53 @@ export class Migration {
     });
   }
 
-  criarEstruturaInicial(): void {
-    let sql = `CREATE TABLE migrations (
-      id INT NOT NULL,
-      sequence INT NOT NULL,
-      sql_statement TEXT NOT NULL,
-      executed CHARACTER(1) NOT NULL DEFAULT 'N',
-      PRIMARY KEY (id)
-    )`;
+  criarEstruturaInicial(jaCriada): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (!jaCriada) {
+        let sql = `CREATE TABLE migrations (
+          id INT NOT NULL,
+          sequence INT NOT NULL,
+          sql_statement TEXT NOT NULL,
+          executed CHARACTER(1) NOT NULL DEFAULT 'N',
+          PRIMARY KEY (id)
+        )`;
 
-    this.storage.adapter.query(sql, []);
+        this.storage.adapter.query(sql, [])
+          .then((result) => {
+            resolve(true);
+          })
+          .catch((error) => {
+            reject(false);
+          });
+      } else {
+        resolve(true);
+      }
+    });
   }
 
-  checarSeTemInternet (): boolean {
-    return true;
-  }
-
-  pegarNovasModificacoes (): void {
-
+  definirModificacoes (modificacoes: string[]): void {
+    this.modificacoes = modificacoes;
   }
 
   executarModificacoes (): void {
-
+    if (this.modificacoes.length > 0) {
+      for (let sql of this.modificacoes) {
+        this.storage.adapter.query(sql, []);
+      }
+    }
   } 
 
   aplicar (): void {
-    this.checarSeEstruturaInicialJaFoiCriada().then((criada) => {
-      if (criada) {
-        console.log ('criado: ' + criada);
-      } else {
-        this.criarEstruturaInicial();
-      }
-    });
+    this.checarSeEstruturaInicialJaFoiCriada()
+      .then((foiCriada) => {
+        return Promise.all([foiCriada, this.criarEstruturaInicial(foiCriada)]); 
+      })
+      .then((results) => {
+        this.executarModificacoes();
+      })
+      .catch((erro) => {
+
+      });
   } 
 
 }

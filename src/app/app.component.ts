@@ -42,8 +42,7 @@ export class MyApp {
 
       let migration = new Migration();
       migration.aplicar();
-      //storage.adapter.query("CREATE TABLE teste_1( nome VARCHAR(20))",[]);
-
+      
       /*
       let push = Push.init({
         android: {

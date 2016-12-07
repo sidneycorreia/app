@@ -33,7 +33,15 @@ export class Migration {
   }
 
   criarEstruturaInicial(): void {
+    let sql = `CREATE TABLE migrations (
+      id INT NOT NULL,
+      sequence INT NOT NULL,
+      sql_statement TEXT NOT NULL,
+      executed CHARACTER(1) NOT NULL DEFAULT 'N',
+      PRIMARY KEY (id)
+    )`;
 
+    this.storage.adapter.query(sql, []);
   }
 
   checarSeTemInternet (): boolean {
@@ -54,7 +62,6 @@ export class Migration {
         console.log ('criado: ' + criada);
       } else {
         this.criarEstruturaInicial();
-        console.log ('NÃO foi criado: ' + criada);
       }
     });
   } 

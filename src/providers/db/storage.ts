@@ -37,7 +37,7 @@ class WebSQLAdapter extends AdapterAbstract implements IAdapter {
     openDatabase (): Promise<any> {
 
       return new Promise((resolve, reject) => {
-        this.db = this.window.openDatabase(this.config.name, '1.0', 'Database APP', -1);
+        this.db = this.window.openDatabase(this.config.name, '1.0', 'Database APP', 1 * 1024 * 1024);
 
         if(this.db){
           resolve('Banco de dados aberto com sucesso');

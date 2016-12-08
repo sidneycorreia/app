@@ -47,7 +47,7 @@ export class Migration {
           sql_statement TEXT NOT NULL,
           executed CHARACTER(1) NOT NULL DEFAULT 'N',
           PRIMARY KEY (id)
-        )`;
+        );`;
 
         this.storage.adapter.query(sql, [])
           .then((result) => {
@@ -60,6 +60,14 @@ export class Migration {
         resolve(true);
       }
     });
+  }
+
+  pegarUltimaModificacaoRealizada (): Promise<any> {
+
+    let sql = `SELECT MAX(sequence) AS sequence
+               FROM migrations`;
+               
+    return this.storage.adapter.query(sql, []);
   }
 
   definirModificacoes (modificacoes: string[]): void {

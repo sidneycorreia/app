@@ -1,1 +1,5 @@
-[]
+{ "migrations" : [
+    {"sql_statement": "CREATE TABLE palestrantes_1 (nome VARCHAR);", "sequence": 1},
+    {"sql_statement": "CREATE TABLE palestrantes_2 (nome VARCHAR);", "sequence": 2},
+    {"sql_statement": "CREATE TABLE palestrantes_3 (nome VARCHAR);", "sequence": 3}
+]}
